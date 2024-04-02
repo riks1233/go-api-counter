@@ -48,7 +48,7 @@ func main() {
 	r.SetTrustedProxies(nil)
 	r.Use(CorsMiddleware)
 	r.GET("/", HttpGetCount(myCounter))
-	r.GET("/increment", HttpIncrement(myCounter))
-	r.GET("/decrement", HttpDecrement(myCounter))
+	r.GET("/inc", HttpIncrement(myCounter))
+	r.GET("/dec", HttpDecrement(myCounter))
 	r.Run()
 }
