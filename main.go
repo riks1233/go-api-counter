@@ -47,6 +47,30 @@ func main() {
 	r := gin.Default()
 	r.SetTrustedProxies(nil)
 	r.Use(CorsMiddleware)
+
+	// r.Use(func() gin.HandlerFunc {
+	// 	secureMiddleware := secure.New(secure.Options{
+	// 		FrameDeny:             true,                              // Prevent clickjacking
+	// 		ContentTypeNosniff:    true,                              // Prevent MIME-type sniffing
+	// 		BrowserXssFilter:      true,                              // Enable XSS filter
+	// 		// ContentSecurityPolicy: "default-src 'self'",              // Restrict resource loading
+	// 		// ReferrerPolicy:        "strict-origin-when-cross-origin", // Referrer policy
+
+	//    // STS or HSTS refers to things regarding HTTPS. As we're using nginx for https, I don't think we need this.
+	// 		// SSLRedirect:           true,                              // Enforce HTTPS
+	// 		// STSSeconds:            31536000,                          // 1 year HSTS
+	// 		// STSIncludeSubdomains:  true,
+	// 		// STSPreload:            true,
+	// 	})
+	// 	return func(c *gin.Context) {
+	// 		if err := secureMiddleware.Process(c.Writer, c.Request); err != nil {
+	// 			c.AbortWithError(http.StatusInternalServerError, err)
+	// 			return
+	// 		}
+	// 		c.Next()
+	// 	}
+	// }())
+
 	r.GET("/", HttpGetCount(myCounter))
 	r.GET("/inc", HttpIncrement(myCounter))
 	r.GET("/dec", HttpDecrement(myCounter))
